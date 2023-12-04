@@ -6,6 +6,6 @@ public enum ComponentArea {
     CENTER_OMNI,
     IMU,
     CLAW,
-    LIFT,
+    LIFT
 
 }

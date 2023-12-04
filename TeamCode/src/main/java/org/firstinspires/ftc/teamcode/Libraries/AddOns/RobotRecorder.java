@@ -91,7 +91,8 @@ public class RobotRecorder extends AddOn {
                             actions2.put(lastUpdated2, r.op().gamepad2.toByteArray());
                         }
                     }
-                } catch (RobotCoreException e) {
+                    /** Remind me to replace Exception e to RobotCoreException*/
+                } catch(Exception e) {
                     r.getLogger().log(Level.SEVERE, "There was an error collecting " +
                             "controller data. Recording has stopped and all data has been reset.");
                     resetRecording(); //ALWAYS run last in a thread

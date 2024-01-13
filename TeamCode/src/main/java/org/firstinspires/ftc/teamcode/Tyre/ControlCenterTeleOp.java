@@ -16,21 +16,34 @@ public class ControlCenterTeleOp {
 
     public static void clawRelease(Robot r, Controller ctrl){
         r.addThread(new Thread(() -> {
-            Servo outtakeServo = (Servo) r.getServo("CLAW");
-            outtakeServo.get().setPosition(clawOpenPos);
+            Servo outtakeServo1 = (Servo) r.getServo("CLAW");
+            Servo outtakeServo2 = (Servo) r.getServo("CLAW2");
+            outtakeServo1.get().setPosition(clawGripPos);
+            outtakeServo2.get().setPosition(clawGripPos);
             while (r.op().opModeIsActive()) {
-                if(ctrl.rightBumper())
-                    outtakeServo.get().setPosition(clawClosedPos);
-                else if(ctrl.leftBumper()){
-                    outtakeServo.get().setPosition(clawGripPos);
+                if (ctrl.rightBumper()) {
+                    outtakeServo2.get().setPosition(clawClosedPos);
+                    outtakeServo1.get().setPosition(clawClosedPos);
+                } else if (ctrl.leftBumper()) {
+                    outtakeServo1.get().setPosition(clawOpenPos);
+                    outtakeServo2.get().setPosition(clawOpenPos);
                 } else {
-                    outtakeServo.get().setPosition(clawOpenPos);
+                    outtakeServo1.get().setPosition(clawGripPos);
+                    outtakeServo2.get().setPosition(clawGripPos);
                 }
             }
         }), true);
     }
 
-
+    public static void clawRotate(Robot r, Controller ctrl){
+        r.addThread(new Thread(() ->{
+            Motor clawMotor = r.getMotor("CLAWMOTOR");
+            while(r.op().opModeIsActive()){
+                if(ctrl.buttonLeft()) clawMotor.get().setPower(0.3);
+                else if(ctrl.buttonRight()) clawMotor.get().setPower(-0.3);
+            }
+        }), true);
+    }
 
     public static void ArmLift(Robot r, Controller ctrl){
         r.addThread(new Thread(() -> {

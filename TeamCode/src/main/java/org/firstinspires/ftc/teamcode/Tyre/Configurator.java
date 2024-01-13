@@ -23,8 +23,10 @@ public class Configurator {
                 driveTrainMotors[2],
                 driveTrainMotors[3],
                 new Servo(robot, "CLAW", CLAW),
+                new Servo(robot, "CLAW2", CLAW2),
                 new Motor(robot, "LIFTRIGHT", LIFTRIGHT, false),
-                new Motor(robot, "LIFTLEFT", LIFTLEFT, false)
+                new Motor(robot, "LIFTLEFT", LIFTLEFT, false),
+                new Motor(robot, "CLAWMOTOR",CLAWMOTOR, false)
         });
 
     }

@@ -44,7 +44,7 @@ public class MechanumDriveTrain extends StandardDriveTrain{
                     case 1: maxSpeed = precisionSpeed; break;
                     case 2: maxSpeed = ultrasPSpeed; break;
                     default:
-                    case 0: maxSpeed = speed;
+                    case 0: maxSpeed = speed*1.75;
                 }
 
                 if(currentSpeed < maxSpeed){

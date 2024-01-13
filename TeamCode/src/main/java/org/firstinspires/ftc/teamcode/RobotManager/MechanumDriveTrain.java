@@ -99,4 +99,19 @@ public class MechanumDriveTrain extends StandardDriveTrain{
         getLogger().log(Level.INFO, "Finished strafing with Encoders");
     }
 
+    public void autoStrafeTimed(long millis, boolean goLeft){
+        getLogger().log(Level.INFO, "Strafing, Timed");
+        long time = System.currentTimeMillis() + millis;
+        double tempSpeed = speed/2;
+        if(!goLeft) tempSpeed *= -1;
+        while(op().opModeIsActive() && time > System.currentTimeMillis()){
+            setIndividualDrivePower(tempSpeed,-tempSpeed,1.1 * -tempSpeed,1.1 * tempSpeed);
+            getLogger().putData("Speed (FL, BL, FR, BR)", "(" + speed + ", " + -speed + ", " + -speed + ", " + speed + ")");
+        }
+        setUniformDrivePower(0);
+        getLogger().clearData();
+        getLogger().log(Level.INFO, "Finished Strafing, Timed");
+    }
+
+
 }

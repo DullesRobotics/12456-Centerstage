@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Tyre.Configurator;
 import org.firstinspires.ftc.teamcode.Tyre.ControlCenterTeleOp;
 
 @TeleOp
-public class MasterTeleOp extends LinearOpMode {
+public class TeleOpWithPlane extends LinearOpMode {
     private MechanumDriveTrain baseRobot;
     @Override
     public void runOpMode() throws InterruptedException {
@@ -21,7 +21,7 @@ public class MasterTeleOp extends LinearOpMode {
         baseRobot.driveWithController(baseRobot.ctrl1());
         ControlCenterTeleOp.ArmRotate(baseRobot, baseRobot.ctrl2());
         ControlCenterTeleOp.ArmLift(baseRobot, baseRobot.ctrl2());
-
+        ControlCenterTeleOp.planeLaunch(baseRobot, baseRobot.ctrl2());
 
 
         while (opModeIsActive())
@@ -30,3 +30,4 @@ public class MasterTeleOp extends LinearOpMode {
         baseRobot.stopAllThreads();
     }
 }
+

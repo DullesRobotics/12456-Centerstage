@@ -12,59 +12,59 @@ import org.firstinspires.ftc.teamcode.RobotManager.Robot;
 public class ControlCenterTeleOp {
 
     public static double clawClosedPos = 0.3, clawGripPos = 0.05, clawOpenPos = 0.4;
+    public static double planeLoad = 0.0, planeLaunch = 0.75;
     public static double originalLiftPos = 0.0, liftDownPow = 1, liftUpPow = 0.8;
 
-    public static void clawRelease(Robot r, Controller ctrl){
+    public static void ArmRotate(Robot r, Controller ctrl){
         r.addThread(new Thread(() -> {
-            Servo outtakeServo1 = (Servo) r.getServo("CLAW");
-            Servo outtakeServo2 = (Servo) r.getServo("CLAW2");
-            outtakeServo1.get().setPosition(clawGripPos);
-            outtakeServo2.get().setPosition(clawGripPos);
-            while (r.op().opModeIsActive()) {
-                if (ctrl.rightBumper()) {
-                    outtakeServo2.get().setPosition(clawClosedPos);
-                    outtakeServo1.get().setPosition(clawClosedPos);
-                } else if (ctrl.leftBumper()) {
-                    outtakeServo1.get().setPosition(clawOpenPos);
-                    outtakeServo2.get().setPosition(clawOpenPos);
-                } else {
-                    outtakeServo1.get().setPosition(clawGripPos);
-                    outtakeServo2.get().setPosition(clawGripPos);
-                }
-            }
-        }), true);
-    }
-
-    public static void clawRotate(Robot r, Controller ctrl){
-        r.addThread(new Thread(() ->{
-            Motor clawMotor = r.getMotor("CLAWMOTOR");
+            Motor armMotor = r.getMotor("ARMMOTOR");
+            armMotor.get().setPower(originalLiftPos);
             while(r.op().opModeIsActive()){
-                if(ctrl.buttonLeft()) clawMotor.get().setPower(0.3);
-                else if(ctrl.buttonRight()) clawMotor.get().setPower(-0.3);
+                if(ctrl.leftTrigger() > 0){
+                    armMotor.get().setPower(liftUpPow * ctrl.leftTrigger());
+                }
+                else if(ctrl.rightTrigger() > 0){
+                    armMotor.get().setPower(liftDownPow * -ctrl.rightTrigger());
+                }
+                else{
+                    armMotor.get().setPower(originalLiftPos);
+                }
             }
         }), true);
     }
 
     public static void ArmLift(Robot r, Controller ctrl){
         r.addThread(new Thread(() -> {
-            Motor liftRightMotor = r.getMotor("LIFTRIGHT");
-            Motor liftLeftMotor = r.getMotor("LIFTLEFT");
-            liftRightMotor.get().setPower(originalLiftPos);
-            liftLeftMotor.get().setPower(originalLiftPos);
-            double currentLiftPower = liftLeftMotor.get().getPower();
+            Motor leftArm = r.getMotor("LIFTLEFT");
+            Motor rightArm = r.getMotor("LIFTRIGHT");
+            leftArm.get().setPower(originalLiftPos);
+            rightArm.get().setPower(originalLiftPos);
             while(r.op().opModeIsActive()){
-                if(ctrl.leftTrigger() > 0){
-                    liftLeftMotor.get().setPower(liftUpPow * ctrl.leftTrigger());
-                    liftRightMotor.get().setPower(liftUpPow * ctrl.leftTrigger());
+                if(ctrl.leftBumper()){
+                    leftArm.get().setPower(liftUpPow);
+                    rightArm.get().setPower(liftUpPow);
                 }
-                else if(ctrl.rightTrigger() > 0){
-                    liftLeftMotor.get().setPower(liftDownPow * -ctrl.rightTrigger());
-                    liftRightMotor.get().setPower(liftDownPow * -ctrl.rightTrigger());
+                else if (ctrl.rightBumper()) {
+                    leftArm.get().setPower(-liftDownPow);
+                    rightArm.get().setPower(-liftDownPow);
                 }
                 else{
-                    liftLeftMotor.get().setPower(originalLiftPos);
-                    liftRightMotor.get().setPower(originalLiftPos);
+                    leftArm.get().setPower(originalLiftPos);
+                    rightArm.get().setPower(originalLiftPos);
                 }
+            }
+        }), true);
+    }
+
+    public static void planeLaunch(Robot r, Controller ctrl){
+        r.addThread(new Thread(() -> {
+            Servo planeMotor = (Servo) r.getServo("PLANE");
+            planeMotor.get().setPosition(planeLoad);
+            while(r.op().opModeIsActive()){
+                if(ctrl.buttonA()){
+                    planeMotor.get().setPosition(planeLaunch);
+                }
+                else planeMotor.get().setPosition(planeLoad);
             }
         }), true);
     }

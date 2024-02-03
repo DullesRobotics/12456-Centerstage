@@ -4,10 +4,9 @@ public enum ComponentArea {
 
     DRIVE_TRAIN,
     IMU,
-    CLAW,
-    CLAW2,
     LIFTRIGHT,
     LIFTLEFT,
-    CLAWMOTOR
+    ARMMOTOR,
+    PLANE,
 
 }

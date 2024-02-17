@@ -6,7 +6,8 @@ public enum ComponentArea {
     IMU,
     LIFTRIGHT,
     LIFTLEFT,
-    ARMMOTOR,
+    INTAKE,
+    OUTAKE,
     PLANE,
 
 }

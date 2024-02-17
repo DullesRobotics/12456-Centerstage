@@ -2,15 +2,7 @@ package org.firstinspires.ftc.teamcode.Tyre;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
-import org.firstinspires.ftc.teamcode.Hardware.ComponentArea;
-import org.firstinspires.ftc.teamcode.Hardware.Motor.Motor;
-import org.firstinspires.ftc.teamcode.Hardware.Servo;
 import org.firstinspires.ftc.teamcode.RobotManager.MechanumDriveTrain;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-
-import java.text.FieldPosition;
 
 @Config
 public class AutonFunctions {

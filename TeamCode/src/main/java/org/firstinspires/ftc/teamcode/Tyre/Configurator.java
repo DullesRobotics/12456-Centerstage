@@ -1,14 +1,11 @@
 package org.firstinspires.ftc.teamcode.Tyre;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-
 import org.firstinspires.ftc.teamcode.Hardware.HardwareComponent;
 import org.firstinspires.ftc.teamcode.Hardware.Motor.DrivetrainMotor;
 import org.firstinspires.ftc.teamcode.Hardware.Motor.Motor;
 import org.firstinspires.ftc.teamcode.Hardware.Motor.MotorConfiguration;
 import org.firstinspires.ftc.teamcode.Hardware.Motor.MotorType;
 import org.firstinspires.ftc.teamcode.Hardware.Servo;
-import org.firstinspires.ftc.teamcode.Libraries.IMU;
 import org.firstinspires.ftc.teamcode.RobotManager.Robot;
 
 import static org.firstinspires.ftc.teamcode.Hardware.ComponentArea.*;
@@ -24,7 +21,8 @@ public class Configurator {
                 driveTrainMotors[3],
                 new Motor(robot, "LIFTRIGHT", LIFTRIGHT, false),
                 new Motor(robot, "LIFTLEFT", LIFTLEFT, false),
-                new Motor(robot, "ARMMOTOR",ARMMOTOR, false),
+                new Motor(robot, "INTAKE", INTAKE, false),
+                new Servo(robot, "OUTAKE", OUTAKE),
                 new Servo(robot, "PLANE", PLANE)
         });
 
